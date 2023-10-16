@@ -2,26 +2,28 @@ import {
   Text,
   StyleSheet,
   SafeAreaView,
-  StatusBar,
   Platform,
-  View,
-} from 'react-native';
-import React, { useState } from 'react';
-import { colors } from './src/utils/colors';
-import { Focus } from './src/features/Focus';
-import { Timer } from './src/features/Timer';
-import { FocusHistory } from './src/features/FocusHistory'
+  StatusBar,
+} from "react-native";
+//import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import { colors } from "./src/utils/colors";
+import { Focus } from "./src/features/Focus";
+import { Timer } from "./src/features/Timer";
+import { FocusHistory } from "./src/features/FocusHistory";
 
 export default function App() {
   const [currentSubject, setCurrentSubject] = useState(null);
   const [history, setHistory] = useState([]);
 
   return (
+    <>
+      <StatusBar style="auto" />
       <SafeAreaView style={styles.container}>
         {!currentSubject ? (
           <>
-           <Focus addSubject={setCurrentSubject} />
-           <FocusHistory history={history} />
+            <Focus addSubject={setCurrentSubject} />
+            <FocusHistory history={history} />
           </>
         ) : (
           <Timer
@@ -31,13 +33,14 @@ export default function App() {
           />
         )}
       </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     backgroundColor: colors.darkBlue,
   },
 });
